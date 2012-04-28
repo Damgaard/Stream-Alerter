@@ -144,9 +144,10 @@ def main():
             if is_notify_worthy(stream) and not already_notified(stream):
                 notify(stream)
                 online_streams.append((stream, time.time()))
-        print "Iteration done. Waiting %d seconds" % (start + DELAY_BETWEEN_RUNS
-                                                            - time.time())
-        time.sleep(start + DELAY_BETWEEN_RUNS - time.time())
+        wait = start + DELAY_BETWEEN_RUNS - time.time()
+        if wait > 0:
+            print "Iteration done. Waiting %d seconds" % wait
+            time.sleep(wait)
 
 if __name__ == "__main__":
     main()
